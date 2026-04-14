@@ -548,10 +548,26 @@ th {
   justify-content: space-around;
   gap: 24px;
   flex-wrap: wrap;
+
+  position: relative;
+}
+
+.missao-content::before {
+  content: "";
+  position: absolute;
+  top: 60px; /* ajusta até alinhar com o centro dos círculos */
+  left: -20px;
+  right: -20px;
+  height: 60px;
+  background: #BFDBDE; /* azul clarinho */
+  z-index: 0;
 }
 
 .missao-item {
   text-align: center;
+
+  position: relative;/*para fazer com que a linha azul fique atras dos icones missao*/
+  z-index: 1;
 }
 
 .icone-circulo {
