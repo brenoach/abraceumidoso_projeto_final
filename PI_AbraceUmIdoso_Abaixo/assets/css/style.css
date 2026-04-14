@@ -665,3 +665,16 @@ th {
     font-size: 14px;
   }
 }
+
+.video{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+iframe{
+  width:660px;
+  height:415px;
+  border:10px solid #6d4c41 ;
+  
+}
