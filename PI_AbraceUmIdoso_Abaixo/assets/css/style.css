@@ -581,7 +581,7 @@ th {
   width: 70%;
   height: 70%;
   object-fit: contain;
-  filter: brightness(0.55);
+  filter: brightness(0) invert(1);
 }
 
 /* =======================================================
