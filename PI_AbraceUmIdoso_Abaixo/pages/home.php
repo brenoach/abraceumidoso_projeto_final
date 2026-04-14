@@ -18,9 +18,9 @@ require_once __DIR__ . '/../includes/layout_top.php';
   <section class="missao-section fade-in">
     <h1 class="section-title">Nossa missão</h1>
     <div class="missao-content">
-      <div class="missao-item"><div class="icone-circulo"><img src="../assets/img/maos.png" alt="Mãos"></div><strong>Conexão</strong></div>
-      <div class="missao-item"><div class="icone-circulo"><img src="../assets/img/idosos.png" alt="Idosos"></div><strong>Carinho</strong></div>
-      <div class="missao-item"><div class="icone-circulo"><img src="../assets/img/pessoas.png" alt="Pessoas"></div><strong>Comunidade</strong></div>
+      <div class="missao-item"><div class="icone-circulo"><img src="../assets/img/maos.png" alt="Mãos"></div><strong>Promover parcerias</strong></div>
+      <div class="missao-item"><div class="icone-circulo"><img src="../assets/img/idosos.png" alt="Idosos"></div><strong>Bem-estar na velhice</strong></div>
+      <div class="missao-item"><div class="icone-circulo"><img src="../assets/img/pessoas.png" alt="Pessoas"></div><strong>Conectar pessoas</strong></div>
     </div>
 
     <div class="video">
