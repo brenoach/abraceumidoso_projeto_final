@@ -5,13 +5,7 @@ require_once __DIR__ . '/../includes/layout_top.php';
 require_login();
 
 $db = db();
-
-// 🔹 Buscar instituições
 $instituicoes = $db->query("SELECT idInstituicao, nomeInstituicao FROM instituicao ORDER BY nomeInstituicao");
-
-if (!$instituicoes) {
-    die("Erro na query: " . $db->error);
-}
 ?>
 
 <style>
@@ -56,7 +50,6 @@ if (!$instituicoes) {
     color: white;
     padding: 5px;
     border-radius: 50%;
-    font-size: 14px;
 }
 
 .foto-usuario img {
@@ -105,7 +98,7 @@ if (!$instituicoes) {
 <main class="page container">
 
 <form class="form-box" action="../actions/salvar_idoso.php" method="POST" enctype="multipart/form-data">
-    
+
 <h1 class="section-title">Cadastrar idoso</h1>
 
 <!-- FOTO -->
@@ -113,15 +106,9 @@ if (!$instituicoes) {
     <div class="foto-usuario" onclick="abrirUpload()">
         <img id="preview" src="../assets/img/user.png">
     </div>
+    <small>Clique para adicionar foto</small>
 
-    <small style="color:#777;">Clique para adicionar foto</small>
-
-    <input type="file" 
-           name="foto" 
-           id="inputFoto" 
-           accept="image/*" 
-           style="display:none"
-           onchange="previewImagem(event)">
+    <input type="file" name="foto" id="inputFoto" accept="image/*" style="display:none" onchange="previewImagem(event)">
 </div>
 
 <div class="form-grid">
@@ -136,9 +123,46 @@ if (!$instituicoes) {
 <input type="text" name="cpf" required>
 </div>
 
-<div>
+<!-- DATA COMPLETA -->
+<div style="grid-column:1/-1">
 <label>Data de nascimento</label>
-<input type="date" name="dataNascimento" required>
+
+<div style="display:flex; gap:10px;">
+
+<select name="dia" id="dia" required>
+<option value="">Dia</option>
+<?php for($i=1;$i<=31;$i++): ?>
+<option value="<?= $i ?>"><?= $i ?></option>
+<?php endfor; ?>
+</select>
+
+<select name="mes" id="mes" required>
+<option value="">Mês</option>
+<option value="01">Jan</option>
+<option value="02">Fev</option>
+<option value="03">Mar</option>
+<option value="04">Abr</option>
+<option value="05">Mai</option>
+<option value="06">Jun</option>
+<option value="07">Jul</option>
+<option value="08">Ago</option>
+<option value="09">Set</option>
+<option value="10">Out</option>
+<option value="11">Nov</option>
+<option value="12">Dez</option>
+</select>
+
+<select name="ano" id="ano" required>
+<option value="">Ano</option>
+<?php for($i=date('Y');$i>=1900;$i--): ?>
+<option value="<?= $i ?>"><?= $i ?></option>
+<?php endfor; ?>
+</select>
+
+</div>
+
+<small id="idadeTexto" style="color:#666;"></small>
+
 </div>
 
 <!-- INSTITUIÇÃO -->
@@ -146,22 +170,16 @@ if (!$instituicoes) {
 <label>Instituição</label>
 
 <?php if ($instituicoes->num_rows > 0): ?>
-
 <select name="idInstituicao" required>
-    <option value="">Selecione uma instituição</option>
-
-    <?php while($inst = $instituicoes->fetch_assoc()): ?>
-        <option value="<?= $inst['idInstituicao'] ?>">
-            <?= htmlspecialchars($inst['nomeInstituicao']) ?>
-        </option>
-    <?php endwhile; ?>
-
+<option value="">Selecione</option>
+<?php while($inst = $instituicoes->fetch_assoc()): ?>
+<option value="<?= $inst['idInstituicao'] ?>">
+<?= htmlspecialchars($inst['nomeInstituicao']) ?>
+</option>
+<?php endwhile; ?>
 </select>
-
 <?php else: ?>
-
-<p style="color:red;">Nenhuma instituição cadastrada.</p>
-
+<p style="color:red;">Nenhuma instituição cadastrada</p>
 <?php endif; ?>
 
 </div>
@@ -197,6 +215,7 @@ if (!$instituicoes) {
 </main>
 
 <script>
+// FOTO
 function abrirUpload() {
     document.getElementById('inputFoto').click();
 }
@@ -207,6 +226,47 @@ function previewImagem(event) {
 
     if (file) {
         preview.src = URL.createObjectURL(file);
+    }
+}
+
+// DATA
+document.getElementById('dia').addEventListener('change', validarData);
+document.getElementById('mes').addEventListener('change', validarData);
+document.getElementById('ano').addEventListener('change', validarData);
+
+function validarData() {
+    const dia = document.getElementById('dia').value;
+    const mes = document.getElementById('mes').value;
+    const ano = document.getElementById('ano').value;
+
+    if (!dia || !mes || !ano) return;
+
+    const data = new Date(ano, mes - 1, dia);
+
+    if (data.getDate() != dia || data.getMonth() != mes - 1) {
+        alert("Data inválida!");
+        document.getElementById('dia').value = "";
+        return;
+    }
+
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - ano;
+
+    if (
+        hoje.getMonth() < (mes - 1) || 
+        (hoje.getMonth() == (mes - 1) && hoje.getDate() < dia)
+    ) {
+        idade--;
+    }
+
+    document.getElementById('idadeTexto').innerText = "Idade: " + idade + " anos";
+
+    if (idade < 18) {
+        alert("O idoso deve ter mais de 18 anos.");
+        document.getElementById('dia').value = "";
+        document.getElementById('mes').value = "";
+        document.getElementById('ano').value = "";
+        document.getElementById('idadeTexto').innerText = "";
     }
 }
 </script>
