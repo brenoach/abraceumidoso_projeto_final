@@ -18,6 +18,7 @@
       <?php endif; ?>
     <?php endif; ?>
 
+    <!-- Foto da voluntario -->
     <div class="form-group" style="text-align:center;">
       <label for="fotoPerfil">
         <img src="../assets/img/fotoPerfil.png" id="preview-img" alt="Foto de perfil" style="width:120px; height:120px; object-fit:cover; border-radius:50%; cursor:pointer;">
@@ -41,7 +42,7 @@
         }
       });
     </script>
-
+  <!-- Foto da voluntario -->
     <div class="form-grid">
       <div>
         <label for="nomePessoa">Nome</label>

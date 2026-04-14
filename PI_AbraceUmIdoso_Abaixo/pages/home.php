@@ -39,7 +39,7 @@ require_once __DIR__ . '/../includes/layout_top.php';
 
 
   <section class="cards-grid fade-in">
-    <article class="card center"><h2>Recuperação de Senha</h2><p>Login com sessão e recuperação de senha por token e e-mail.</p><a class="card-button" href="login.php">Acessar</a></article>
+    <article class="card center"><h2>Recuperação de Senha</h2><p>Login com sessão e recuperação de senha por token e e-mail.</p><a class="card-button" href="forgot_password.php">Acessar</a></article>
     <article class="card center"><h2>Cadastros</h2><p>Instituições, idosos, voluntários e funcionários usando o mesmo banco.</p><a class="card-button" href="cadastro_instituicao.php">Cadastrar</a></article>
     <article class="card center carta"><h2>Cartas</h2><p>Envio, visualização, histórico e recebimento mantendo a aparência de papel.</p><a class="card-button" href="cartas.php">Abrir módulo</a></article>
     <article class="card center"><h2>Visitas</h2><p>Agendamento, agenda por data e acompanhamento do status.</p><a class="card-button" href="agenda.php">Ver agenda</a></article>
