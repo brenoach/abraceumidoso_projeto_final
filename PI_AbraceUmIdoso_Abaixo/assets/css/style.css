@@ -695,3 +695,75 @@ iframe{
   border:10px solid #6d4c41 ;
   
 }
+
+/* =========================================
+   CUSTOM - CADASTRAR IDOSO (TELA CANVA)
+========================================= */
+
+/* Fundo mais suave */
+body {
+  background: #f5efe6;
+}
+
+/* Card do formulário */
+.form-box {
+  background: #e9dfd2 !important;
+  border-radius: 20px !important;
+  padding: 40px !important;
+  max-width: 700px !important;
+}
+
+/* Título */
+.section-title {
+  text-align: center;
+  font-size: 26px;
+  color: #3e2c23;
+}
+
+/* FOTO */
+.foto-usuario {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #5c4033;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+
+.foto-usuario img {
+  width: 70%;
+  opacity: 0.8;
+}
+
+/* Inputs mais clean */
+.form-box input,
+.form-box select,
+.form-box textarea {
+  border: none !important;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* Data alinhada */
+.data-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botão estilo Canva */
+.actions-row {
+  justify-content: center;
+}
+
+.actions-row button {
+  background: #5c4033 !important;
+  color: #fff !important;
+  border-radius: 20px !important;
+  padding: 12px 35px !important;
+}
+
+.actions-row button:hover {
+  background: #3e2c23 !important;
+}
