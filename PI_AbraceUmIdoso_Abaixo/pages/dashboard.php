@@ -20,6 +20,7 @@ if ($user['tipo'] === 'V') {
     $cards = [
       ['title' => 'Recebimento de cartas', 'page' => 'recebimento_cartas.php', 'desc' => 'Veja as cartas recebidas e registre a resposta do idoso.'],
       ['title' => 'Cadastrar idoso', 'page' => 'cadastro_idoso.php', 'desc' => 'Cadastre novos idosos vinculados à instituição.'],
+      ['title' => 'Cadastrar funcionario', 'page' => 'cadastro_funcionario.php', 'desc' => 'Cadastre novos funcionários da instituição.'],
       ['title' => 'Agenda da instituição', 'page' => 'agenda.php', 'desc' => 'Acompanhe visitas agendadas por data.'],
       ['title' => 'Editar instituição', 'page' => 'editar_perfil.php', 'desc' => 'Mantenha os dados da instituição atualizados.'],
     ];
