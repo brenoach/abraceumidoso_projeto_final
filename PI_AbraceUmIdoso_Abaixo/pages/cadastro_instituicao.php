@@ -7,6 +7,32 @@
       <p class="muted">Preencha os dados da instituição parceira.</p>
 
       <div class="form-grid">
+
+        <!-- Foto da instituição -->
+        <div style="grid-column: 1 / -1;">
+          <label for="fotoInstituicao">
+            <img src="../assets/img/fotoPerfil.png" id="preview-img" alt="Foto de perfil" style="width:120px; height:120px; object-fit:cover; border-radius:50%; cursor:pointer;">
+          </label>
+          <input type="file" id="fotoInstituicao" name="fotoInstituicao" accept=".jpg,.jpeg,.png,.webp,image/*" hidden>
+          <p style="margin-top:8px; font-size:14px;">Clique na imagem para selecionar uma foto.</p>
+        </div>
+
+        <script>
+          const inputFoto = document.getElementById('fotoInstituicao');
+          const previewImg = document.getElementById('preview-img');
+
+          inputFoto.addEventListener('change', function () {
+            const arquivo = this.files[0];
+            if (arquivo) {
+              const leitor = new FileReader();
+              leitor.onload = function (e) {
+                previewImg.src = e.target.result;
+              };
+              leitor.readAsDataURL(arquivo);
+            }
+          });
+        </script>
+
         <!-- Nome da instituição -->
         <div>
           <label for="nomeInstituicao">Nome da instituição</label>
@@ -37,10 +63,35 @@
           <input type="text" id="celular" name="celular">
         </div>
 
+        <!-- BUSCA CEP -->
+            <script>
+                function buscarCep() {
+                    let cep = document.getElementById('cep').value;
+                    cep = cep.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+                    if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
+                        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                            .then(res => res.json())
+                            .then(data => {
+                                if (!data.erro) {
+                                    document.getElementById('nomeLogradouro').value = data.logradouro;
+                                    document.getElementById('bairro').value = data.bairro;
+                                    document.getElementById('cidade').value = data.localidade;
+                                    document.getElementById('estado').value = data.uf;
+                                } else {
+                                    alert("CEP não encontrado.");
+                                }
+                            })
+                            .catch(error => console.error("Erro na API:", error));
+                    } else {
+                        alert("Formato de CEP inválido.");
+                    }
+                }
+            </script> 
+
         <!-- CEP -->
         <div>
           <label for="cep">CEP</label>
-          <input type="text" id="cep" name="cep" maxlength="8" required>
+          <input type="text" id="cep" name="cep" onblur="buscarCep()" maxlength="8" required>
         </div>
 
         <!-- Estado -->
@@ -125,13 +176,6 @@
           <label for="confirmarSenha">Confirmar senha</label>
           <input type="password" id="confirmarSenha" name="confirmarSenha" required>
         </div>
-
-        <!-- Foto da instituição -->
-        <div style="grid-column: 1 / -1;">
-          <label for="fotoInstituicao">Foto da instituição</label>
-          <input type="file" id="fotoInstituicao" name="fotoInstituicao" accept="image/*" required>
-        </div>
-      </div>
 
       <div class="actions-row">
         <button type="submit">Salvar instituição</button>

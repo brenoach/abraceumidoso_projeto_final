@@ -18,6 +18,7 @@
       <?php endif; ?>
     <?php endif; ?>
 
+    <!-- Foto da voluntario -->
     <div class="form-group" style="text-align:center;">
       <label for="fotoPerfil">
         <img src="../assets/img/fotoPerfil.png" id="preview-img" alt="Foto de perfil" style="width:120px; height:120px; object-fit:cover; border-radius:50%; cursor:pointer;">
@@ -41,7 +42,7 @@
         }
       });
     </script>
-
+  <!-- Foto da voluntario -->
     <div class="form-grid">
       <div>
         <label for="nomePessoa">Nome</label>
@@ -73,9 +74,33 @@
         <input type="tel" id="telefone" name="telefone" maxlength="14" placeholder="(00) 0000-0000">
       </div>
 
+      <!-- BUSCA CEP -->
+            <script>
+                function buscarCep() {
+                    let cep = document.getElementById('cep').value;
+                    cep = cep.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+                    if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
+                        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                            .then(res => res.json())
+                            .then(data => {
+                                if (!data.erro) {
+                                    document.getElementById('nomeLogradouro').value = data.logradouro;
+                                    document.getElementById('bairro').value = data.bairro;
+                                    document.getElementById('cidade').value = data.localidade;
+                                    document.getElementById('estado').value = data.uf;
+                                } else {
+                                    alert("CEP não encontrado.");
+                                }
+                            })
+                            .catch(error => console.error("Erro na API:", error));
+                    } else {
+                        alert("Formato de CEP inválido.");
+                    }
+                }
+            </script>
       <div>
         <label for="cep">CEP</label>
-        <input type="text" id="cep" name="cep" maxlength="9" placeholder="00000-000">
+        <input type="text" id="cep" name="cep" onblur="buscarCep()" maxlength="9" placeholder="00000-000">
       </div>
 
       <div>
